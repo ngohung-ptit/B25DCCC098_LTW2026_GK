@@ -15,14 +15,22 @@ const BookTable = ({ books, onToggle, onDelete }) => {
         </tr>
       </thead>
       <tbody>
-        {books.map((book) => (
-          <BookRow
-            key={book.id}
-            book={book}
-            onToggle={onToggle}
-            onDelete={onDelete}
-          />
-        ))}
+        {books.length > 0 ? (
+          books.map((book) => (
+            <BookRow
+              key={book.id}
+              book={book}
+              onToggle={onToggle}
+              onDelete={onDelete}
+            />
+          ))
+        ) : (
+          <tr>
+            <td colSpan="6" style={{ textAlign: 'center', padding: '16px', color: '#6b7280' }}>
+              Không có dữ liệu
+            </td>
+          </tr>
+        )}
       </tbody>
     </table>
   );

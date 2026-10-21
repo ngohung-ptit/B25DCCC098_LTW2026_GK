@@ -1,7 +1,13 @@
 import React from 'react';
 import { CATEGORIES } from '../data';
 
-const FilterBar = ({ keyword, category, onSearchChange, onCategoryChange }) => {
+const FilterBar = ({
+  keyword,
+  debouncedKeyword,
+  category,
+  onSearchChange,
+  onCategoryChange,
+}) => {
   return (
     <div className="filter-bar">
       <div className="filter-item">
@@ -12,6 +18,9 @@ const FilterBar = ({ keyword, category, onSearchChange, onCategoryChange }) => {
           value={keyword}
           onChange={onSearchChange}
         />
+        {keyword !== debouncedKeyword && (
+          <span className="searching-indicator">Đang tìm...</span>
+        )}
       </div>
       <div className="filter-item">
         <label htmlFor="category-select">Thể loại</label>

@@ -1,6 +1,3 @@
-const BUILD_TAG = "qf-2817";
-/* eslint-disable import/first, no-unused-vars */
-
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
@@ -17,6 +14,17 @@ const App = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    const saved = localStorage.getItem('gk_books');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        setBooks(parsed);
+        setLoading(false);
+        return;
+      } catch (err) {
+      }
+    }
+
     const controller = new AbortController();
 
     axios
@@ -38,6 +46,12 @@ const App = () => {
       controller.abort();
     };
   }, []);
+
+  useEffect(() => {
+    if (!loading) {
+      localStorage.setItem('gk_books', JSON.stringify(books));
+    }
+  }, [books, loading]);
 
   const handleAddBook = (newBook) => {
     const maxId = books.length > 0 ? Math.max(...books.map((b) => b.id)) : 0;

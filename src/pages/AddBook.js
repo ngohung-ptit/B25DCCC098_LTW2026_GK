@@ -18,12 +18,17 @@ const AddBook = ({ onAdd }) => {
       setError('Vui lòng nhập đầy đủ thông tin');
       return;
     }
+    const numYear = Number(year);
+    if (!Number.isInteger(numYear) || numYear < 1900 || numYear > 2026) {
+      setError('Năm xuất bản phải từ 1900 đến 2026');
+      return;
+    }
 
     setError('');
     onAdd({
       title: title.trim(),
       author: author.trim(),
-      year: Number(year),
+      year: numYear,
       category,
       available: true,
     });

@@ -24,11 +24,7 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ],
-    "rules": {
-      "import/first": "off",
-      "no-unused-vars": "off"
-    }
+    ]
   },
   "browserslist": {
     "production": [
